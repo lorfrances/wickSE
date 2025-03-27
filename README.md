@@ -11,3 +11,5 @@ Images of sample results are shown below.
 
 <img src="https://github.com/lorfrances/wickSE/blob/main/sample_meni.png" width="500">
 
+<img src="https://github.com/lorfrances/wickSE/blob/main/sample_mono.png" width="500">
+
