@@ -9,7 +9,7 @@ These 3 files were developed for use in the Surface Evolver (https://kenbrakke.c
   
 Images of sample results are shown below.
 
-<img src="https://github.com/lorfrances/wickSE/blob/main/sample_meni.png" width="500">
+<img src="https://github.com/lorfrances/wickSE/blob/main/sample_meni.png" width="400">
 
-<img src="https://github.com/lorfrances/wickSE/blob/main/sample_mono.png" width="500">
+<img src="https://github.com/lorfrances/wickSE/blob/main/sample_mono.png" width="400">
 
