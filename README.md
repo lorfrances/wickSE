@@ -1,2 +1,6 @@
 # wickSE
-Surface Evolver files used for static meniscus topology predictions in evaporator wicks
+The 3 files were developed for use in the Surface Evolver (https://kenbrakke.com/evolver/evolver.html) for 3-D numerical simulations of the capillary surface and pressure in evaporating wick structures. These include:
+  (1) A 3D-printed wick microstructure (unit-cell) with the meniscus facing outward on the open plane.
+  (2) Spherical particle (unit-cell) for use in a hexagonal packing arrangement. It is also sintered to the substrate.
+  (3) The 3D-printed wick microstructure (1), including a central strut.
+Images of example results are shown below:
