@@ -8,4 +8,5 @@ These 3 files were developed for use in the Surface Evolver (https://kenbrakke.c
   (3) The 3D-printed wick microstructure (1), including a central strut (1/6 geometry by symmetry).
   
 Images of sample results are shown below.
+<img src="url-to-image" width="48">
 
