@@ -6,11 +6,14 @@ If you use these codes in your work, please cite the above publication.
 
 The files include:
 
-  (1) A 3D-printed wick microstructure (unit-cell) with the meniscus facing outward on the open plane (1/6 geometry by symmetry).
+  (1) A 3D-printed wick microstructure (unit-cell) with the meniscus facing outward on the open plane (1/6 geometry by symmetry):
+  >HexSlice.fe
+
+  (2) Spherical particle (unit-cell) for use in a hexagonal packing arrangement. It is also sintered to the substrate (1/8 of the diameter is truncated in vertical direction):
+  >SphericalParticle.fe
   
-  (2) Spherical particle (unit-cell) for use in a hexagonal packing arrangement. It is also sintered to the substrate (1/8 of the diameter is truncated in vertical direction).
-  
-  (3) The same 3D-printed wick microstructure of (1), including a central strut (1/6 geometry by symmetry).
+  (3) The same 3D-printed wick microstructure of (1), including a central strut (1/6 geometry by symmetry):
+  >CentralStrut.fe
   
 Images of sample results are shown below.
 
