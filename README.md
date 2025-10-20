@@ -10,7 +10,7 @@ The files include:
   
   (2) Spherical particle (unit-cell) for use in a hexagonal packing arrangement. It is also sintered to the substrate (1/8 of the diameter is truncated in vertical direction).
   
-  (3) The 3D-printed wick microstructure (1), including a central strut (1/6 geometry by symmetry).
+  (3) The same 3D-printed wick microstructure of (1), including a central strut (1/6 geometry by symmetry).
   
 Images of sample results are shown below.
 
@@ -30,4 +30,4 @@ A few useful functions are provided. These can be run as commands in SE:
 
 > liq_thik3: Used to write to file the thickness (elevation) of all vertices on the liquid surface (used to obtain the liquid film thickness).
 
-For primary SE commands, please see the documentation: https://kenbrakke.com/evolver/html/evolver.htm
+For primary SE commands and information, please see the documentation: https://kenbrakke.com/evolver/html/evolver.htm
