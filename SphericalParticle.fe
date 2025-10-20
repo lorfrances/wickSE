@@ -1,0 +1,251 @@
+KEEP_ORIGINALS
+
+parameter Radius1 = 0.5
+parameter SqLen = 2.0
+
+parameter BufferLen = Radius1*1.02
+parameter BufferWid = BufferLen - Radius1
+parameter LiqHt = Radius1
+parameter SubFac = 0.25
+
+parameter HalfSqLenX = Radius1*1.02
+parameter HexPosY = Radius1*1.02/(sqrt(3))
+parameter HalfSqLenY = 2.04*Radius1/(sqrt(3))
+parameter SlopeUL = (-HexPosY + HalfSqLenY)/(-HalfSqLenX)
+parameter CAsl = 45 // contact angle between solid sphere and liquid
+parameter CAlf = 15// contact angle between liquid and flat surface
+#define WALLT (-cos(CAsl*pi/180))
+parameter Rad_D = sqrt(Radius1*Radius1 - (Radius1 - LiqHt)^2) 
+
+constraint 1 convex // sphere 1 center
+formula: sqrt((x)^2 + (y)^2 + (z - Radius1)^2) = Radius1
+
+constraint 2 // substrate surface
+formula: z = Radius1*SubFac
+
+constraint 9 // top edge 
+formula: x = -HalfSqLenX
+energy:
+e1: 0
+e2: 0
+e3: 0
+
+constraint 10 // bottom edge
+formula: x = HalfSqLenX
+energy:
+e1: 0
+e2: 0
+e3: 0
+
+constraint 11 //top left edge point-slope
+formula: y = SlopeUL*(x) + -HalfSqLenY
+energy:
+e1: 0
+e2: 0
+e3: 0
+
+constraint 12 //top right edge point-slope
+formula: y = -SlopeUL*(x) - -HalfSqLenY
+energy:
+e1: 0
+e2: 0
+e3: 0
+
+constraint 13 // bottom right edge point-slope
+formula: y = SlopeUL*(x - HalfSqLenX) + HexPosY
+energy:
+e1: 0
+e2: 0
+e3: 0
+
+constraint 14 // bottom left edge point-slope
+formula: y = -SlopeUL*(x - HalfSqLenX) - HexPosY
+energy:
+e1: 0
+e2: 0
+e3: 0
+
+constraint 15 nonnegative // z>=0
+formula: z = Radius1*SubFac
+
+constraint 16 nonnegative // z >= 100
+formula: z = -100
+
+vertices:
+////////// base vertices //////////// lower
+1 HalfSqLenX HexPosY SubFac*Radius1 FIXED
+2 HalfSqLenX -HexPosY SubFac*Radius1 FIXED
+3 0 HalfSqLenY SubFac*Radius1 FIXED
+4 0 -HalfSqLenY SubFac*Radius1 FIXED
+//////////////////upper //////////////////////////
+111 -HalfSqLenX HexPosY SubFac*Radius1 FIXED
+222 -HalfSqLenX -HexPosY SubFac*Radius1 FIXED
+
+
+
+/////// sphere 1/////////////////
+////////// liquid surface //////////
+5 0 Rad_D LiqHt constraint 1 15
+6 0 -Rad_D LiqHt constraint 1 15
+7 Rad_D 0 LiqHt constraint 1 15
+8 -Rad_D 0 LiqHt constraint 1 15
+
+////////////// upper hemisphere ////////////////
+9 0 0 Radius1*2 constraint 1 
+
+//////////////// lower hemispher ///////////////
+10 0 Radius1 Radius1*SubFac constraint 1 2
+11 0 -Radius1 Radius1*SubFac constraint 1 2
+12 Radius1 0 Radius1*SubFac constraint 1 2
+13 -Radius1 0 Radius1*SubFac constraint 1 2
+
+
+//////////////////////LIQUID SURFACE OUTER VERTICES /////////////
+68 HalfSqLenX HexPosY LiqHt constraint 10 13 15
+69 HalfSqLenX -HexPosY LiqHt constraint 10 14 15
+70 0 HalfSqLenY LiqHt constraint 12 13 15
+71 0 -HalfSqLenY LiqHt constraint 11 14 15
+72 -HalfSqLenX HexPosY LiqHt constraint 9 12 15
+73 -HalfSqLenX -HexPosY LiqHt constraint 9 11 15
+
+/////////////////////////bottom and top center //////////////
+74 -HalfSqLenX 0 LiqHt constraint 9 15
+75 HalfSqLenX 0 LiqHt constraint 10 15
+
+edges:
+///////////////////// sphere 1////////////////////
+//////////////////// liquid surface ///////////////
+1 5 7 constraint 1
+2 7 6 constraint 1
+3 6 8 constraint 1 
+4 8 5 constraint 1
+
+///////////////////// substrate surface ////////////////////
+5 10 12 constraint 1 2
+6 12 11 constraint 1 2
+7 11 13 constraint 1 2
+8 13 10 constraint 1 2
+
+/////////////////// upper hemisphere //////////////////////
+9 5 9 constraint 1
+10 7 9 constraint 1
+11 6 9 constraint 1
+12 8 9 constraint 1
+
+//////////////////// lower hemisphere //////////////////////////
+13 5 10 constraint 1
+14 7 12 constraint 1
+15 6 11 constraint 1
+16 8 13 constraint 1
+
+
+//////////////////// base edges /////////////////////////////////
+113 1 2 constraint 10
+114 1 3 constraint 13
+115 2 4 constraint 14
+116 4 222 constraint 11
+117 3 111 constraint 12
+118 111 222 constraint 9
+
+///////////////////////liquid height edges surface //////////////////
+//////////////////// base edges /////////////////////////////////
+119 68 69 constraint 10 15
+120 68 70 constraint 13 15
+121 69 71 constraint 14 15
+
+122 71 73 constraint 11 15
+123 70 72 constraint 12 15
+124 72 73 constraint 9 15
+
+///////////////////////// internal edges //////////////////////////
+////////////////////////////upper////////////////////////////
+125 8 73 constraint 15
+126 8 72 constraint 15
+127 5 72 constraint 15
+128 6 73 constraint 15
+129 6 71 constraint 15
+130 5 70 constraint 15
+
+//////////////////////////////lower///////////////
+131 6 69 constraint 15
+132 69 7 constraint 15
+133 7 68 constraint 15
+134 68 5 constraint 15
+
+
+
+faces:
+///////////////////sphere 1 ///////////////////////////////
+///////////////// upper hemisphere /////////////////////
+1 9 -10 -1 constraint 1 density 0 color lightred
+2 -9 -4 12 constraint 1 density 0 color lightred
+3 11 -12 -3 constraint 1 density 0 color lightred
+4 -2 10 -11 constraint 1 density 0 color lightred
+/////////////////// lower hemisphere ////////////////////////
+5 -13 1 14 -5 constraint 1 tension WALLT color lightred
+6 -14 2 15 -6 constraint 1 tension WALLT color lightred
+7 -15 3 16 -7 constraint 1 tension WALLT color lightred
+8 -16 4 13 -8 constraint 1 tension WALLT color lightred
+
+
+/////////////////////////////////////////////
+///////////////////////////base plate/////////////////////////
+105 -113 114 117 118 -116 -115 color lightred
+
+///////////////////////////side plates //////////////////////////
+//////////////////////////liquid surface /////////////////////////////////
+//////////////////lower///////////////////////////////
+106 -129 128 -122 constraint 15 16 tension 1 color lightblue
+107 3 125 -128 constraint 15 16 tension 1 color lightblue
+108 4 127 -126 constraint 15 16 tension 1 color lightblue
+109 -125 126 124 constraint 15 16 tension 1 color lightblue
+110 130 123 -127 constraint 15 16 tension 1 color lightblue
+
+//////////////////upper//////////////////////////////////////////
+111 -121 -131 129 constraint 15 16 tension 1 color lightblue
+112 131 132 2 constraint 15 16 tension 1 color lightblue
+113 -119 -133 -132 constraint 15 16 tension 1 color lightblue
+114 133 134 1 constraint 15 16 tension 1 color lightblue
+115 120 -130 -134 constraint 15 16 tension 1 color lightblue
+
+
+bodies:
+1 -5 -6 -7 -8 106 107 108 109 110 111 112 113 114 115 pressure -17.0
+
+read
+stl := { 
+   local mag,inx;
+   printf "solid\n" >> "C:/evolver2/stlmodel.txt";
+   foreach facet ff do
+   { mag := sqrt(ff.x^2+ff.y^2+ff.z^2);
+     printf "facet normal %f %f %f\n",ff.x/mag,ff.y/mag,ff.z/mag >> "C:/evolver2/stlmodel.txt";
+     printf "   outer loop\n" >> "C:/evolver2/stlmodel.txt";
+     for ( inx := 1 ; inx <= 3 ; inx += 1 )
+       printf "     vertex %f %f %f\n",ff.vertex[inx].x,ff.vertex[inx].y,
+             ff.vertex[inx].z >> "C:/evolver2/stlmodel.txt";
+     printf "   endloop\n" >> "C:/evolver2/stlmodel.txt";
+     printf "  endfacet\n">> "C:/evolver2/stlmodel.txt";
+   };
+   printf "endsolid\n" >> "C:/evolver2/stlmodel.txt";
+}
+
+
+liq_thik3:=
+{ printf "ID	x	y	z\n" >> "C:/evolver2/liq_thik.txt";
+for (ii:=1; ii<=vertex_count;ii+=1) if (vertex[ii] on_constraint 15) then printf "%f %f %f %f \n", 
+vertex[ii].id, vertex[ii].x, vertex[ii].y, vertex[ii].z>> "C:/evolver2/liq_thik.txt";}
+
+Init:=
+{r 3; V 2; u 5; V 2; g 8}
+
+Ref:=
+{r}
+
+Run1:=
+{V 2; u 5; V 2; g 10}
+
+Run1_U :=
+{V 2; u 5; V 2; U; g 6; U}
+
+Run_ALL :=
+{Init; Run1 10; r; Run1 10; Run1_U 75; Run1_U 75; Run1 10; g 20; Run1 20; g 40; Run1 10}
