@@ -1,6 +1,6 @@
 # wickSE
 These 3 files were developed for use in the Surface Evolver (https://kenbrakke.com/evolver/evolver.html) for 3-D numerical simulations of the capillary surface and pressure in evaporating wick structures. Results from these simulations have been published:
-> L. Franceschetti, Y. Kameya, M. Kaviany, "3D-printed, ceramic porous metasurface wick: hexagonal-prism unit-cell capillary evaporator," _Int. J. of Heat and Mass Transfer_, accepted for publication, 2025.
+> L. Franceschetti, Y. Kameya, M. Kaviany, "3D-printed, ceramic porous metasurface wick: hexagonal-prism unit-cell capillary evaporator," _Int. J. of Heat and Mass Transfer_, **246, 127041,** 2025.
 
 If you use these codes in your work, please cite the above publication.
 
